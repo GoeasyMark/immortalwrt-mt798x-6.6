@@ -2822,3 +2822,21 @@ ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
 endif
 endef
 TARGET_DEVICES += wirelesstag_zx7981pd-ubootmod
+
+
+# KJ30-N: serial-only initramfs for first-boot hardware validation.
+# No NAND/Factory partitions, Ethernet, Wi-Fi or sysupgrade image are exposed.
+define Device/kjd_kj30-n
+  DEVICE_VENDOR := KJD
+  DEVICE_MODEL := KJ30-N
+  DEVICE_DTS := mt7981b-kjd-kj30-n
+  DEVICE_DTS_DIR := $(DTS_DIR)/
+  DEVICE_DTS_LOADADDR := 0x43f00000
+  KERNEL_LOADADDR := 0x44000000
+  KERNEL := kernel-bin | gzip
+  KERNEL_INITRAMFS_SUFFIX := -initramfs.itb
+  KERNEL_INITRAMFS := kernel-bin | lzma | \\
+        fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
+  IMAGES :=
+endef
+TARGET_DEVICES += kjd_kj30-n

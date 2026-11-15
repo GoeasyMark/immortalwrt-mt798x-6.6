@@ -1,0 +1,59 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+/*
+ * KJ30-N MT7981 serial recovery DTS.
+ *
+ * First-stage validation only: Ethernet, SPI-NAND and Wi-Fi are intentionally
+ * disabled. This image is an initramfs for RAM boot and must not be flashed.
+ */
+
+/dts-v1/;
+#include "mt7981.dtsi"
+
+/ {
+	model = "KJD KJ30-N (serial recovery)";
+	compatible = "kjd,kj30-n", "mediatek,mt7981";
+
+	aliases {
+		serial0 = &uart0;
+	};
+
+	chosen {
+		stdout-path = "serial0:115200n8";
+	};
+
+	/*
+	 * RAM banks copied from /proc/iomem on the stock KJ30-N.
+	 * Keep the reserved holes between banks; do not collapse into one range.
+	 */
+	memory@40000000 {
+		device_type = "memory";
+		reg = <0 0x40000000 0 0x03000000>,
+		      <0 0x43030000 0 0x04c50000>,
+		      <0 0x48000000 0 0x18000000>;
+	};
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&watchdog {
+	status = "okay";
+};
+
+&crypto {
+	status = "okay";
+};
+
+/* Do not touch board flash or depend on unverified switch wiring in stage 1. */
+&spi0 {
+	status = "disabled";
+};
+
+&snand {
+	status = "disabled";
+};
+
+&eth {
+	status = "disabled";
+};
