@@ -173,7 +173,11 @@ diff -u -r a/drivers/net/ethernet/mediatek/mtk_eth_soc.h b/drivers/net/ethernet/
  #if defined(CONFIG_NET_MEDIATEK_HNAT) || defined(CONFIG_NET_MEDIATEK_HNAT_MODULE)
  #include "mtk_hnat/nf_hnat_mtk.h"
  #endif
--
++#include "mtk_eth_reset.h"
++#ifndef HIT_BIND_FORCE_TO_CPU
++#define HIT_BIND_FORCE_TO_CPU 0x16
++#endif
++ 
 +static int mtk_wifi_num = 0;
 +static int mtk_rest_cnt = 0;
 +atomic_t eth1_in_br = ATOMIC_INIT(0);
