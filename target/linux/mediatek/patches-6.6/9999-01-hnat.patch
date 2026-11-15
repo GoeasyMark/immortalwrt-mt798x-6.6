@@ -169,7 +169,7 @@ diff -u -r a/drivers/net/ethernet/mediatek/mtk_eth_soc.h b/drivers/net/ethernet/
  			ret = -ENOMEM;
 --- a/drivers/net/ethernet/mediatek/mtk_eth_soc.c	2025-06-15 22:32:46.130001496 +0800
 +++ b/drivers/net/ethernet/mediatek/mtk_eth_soc.c	2025-06-18 00:22:51.492001032 +0800
-@@ -31,7 +31,17 @@
+@@ -31,1 +31,11 @@
  #include "mtk_wed.h"
 +#include "mtk_eth_reset.h"
 +#ifndef HIT_BIND_FORCE_TO_CPU
@@ -180,10 +180,10 @@ diff -u -r a/drivers/net/ethernet/mediatek/mtk_eth_soc.h b/drivers/net/ethernet/
 +static int mtk_rest_cnt = 0;
 +atomic_t eth1_in_br = ATOMIC_INIT(0);
 +EXPORT_SYMBOL(eth1_in_br);
- 
-+@@ -36,6 +46,7 @@
-+ MODULE_PARM_DESC(msg_level, "Message level (-1=defaults,0=none,...,16=all)");
-+ DECLARE_COMPLETION(wait_ser_done);
++
+@@ -36,1 +46,2 @@
+ MODULE_PARM_DESC(msg_level, "Message level (-1=defaults,0=none,...,16=all)");
++DECLARE_COMPLETION(wait_ser_done);
  #define MTK_ETHTOOL_STAT(x) { #x, \
  			      offsetof(struct mtk_hw_stats, x) / sizeof(u64) }
  
