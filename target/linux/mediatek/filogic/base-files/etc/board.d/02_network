@@ -183,6 +183,9 @@ mediatek_setup_interfaces()
 	bt,rb300)
 		ucidef_set_interfaces_lan_wan "lan0 lan1 lan2 lan3" wan
 		;;
+	kjd,kj30-n)
+		# Serial-only recovery image: network ports are intentionally disabled.
+		;;
 	*)
 		ucidef_set_interfaces_lan_wan "lan1 lan2 lan3 lan4" wan
 		;;
