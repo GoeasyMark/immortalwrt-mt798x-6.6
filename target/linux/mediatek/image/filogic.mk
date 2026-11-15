@@ -2835,7 +2835,7 @@ define Device/kjd_kj30-n
   KERNEL_LOADADDR := 0x44000000
   KERNEL := kernel-bin | gzip
   KERNEL_INITRAMFS_SUFFIX := -initramfs.itb
-  KERNEL_INITRAMFS := kernel-bin | lzma | \\
+  KERNEL_INITRAMFS := kernel-bin | lzma | \
         fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | pad-to 64k
   IMAGES :=
 endef
