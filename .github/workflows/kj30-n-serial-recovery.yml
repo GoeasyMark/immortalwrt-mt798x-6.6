@@ -1,6 +1,9 @@
 name: KJ30-N serial recovery build
 
 on:
+  push:
+    branches:
+      - feat/kj30-n-serial-recovery
   pull_request:
     paths:
       - "target/linux/mediatek/**"
